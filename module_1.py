@@ -49,10 +49,10 @@ class Livre:
             # Déjà disponible
             return f'{self.titre} de {self.auteur} : {self.isbn} n\'était PAS sorti'
 
+    # Comment retourner le nombre total de livres ?
     @classmethod
     def obtenir_nombre_total(cls):
-    # Comment retourner le nombre total de livres ?
-        return f'Nombre total de livres: {Livre.nombre_total_livres}'
+        return f'Nombre total de livres: {cls.nombre_total_livres}'
 
 
 # Usage :
@@ -61,7 +61,7 @@ print(livre_1)  # Appelle automatiquement __str__
 livre_2 = Livre('Harry Potter vol 2', 'J.K. Rowling', '1234567890')
 print(livre_2)  # Appelle automatiquement __str__
 
-print(Livre.obtenir_nombre_total)
+print(Livre.obtenir_nombre_total())
 
 # Usage :
 """ livre_1 = Livre('Harry Potter', 'J.K. Rowling', '1234567890')  # ISBN-10
