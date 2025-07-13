@@ -1,6 +1,8 @@
 class Livre:
     # ATTRIBUT DE CLASSE (partagé par toutes les instances)
     nombre_total_livres = 0
+    tous_les_livres = []  # Nouvelle liste de classe pour stocker tous les livres
+
 
     def __init__(self, titre: str, auteur: str, isbn: str):
         # VALIDATION avec méthode statique
@@ -14,6 +16,9 @@ class Livre:
 
         # INCRÉMENTER l'attribut de classe
         Livre.nombre_total_livres += 1
+
+        # Ajouter à la liste
+        Livre.tous_les_livres.append(self)
 
     @property
     def disponibilite(self):
@@ -58,11 +63,25 @@ class Livre:
         """Méthode de classe - accède aux attributs de classe"""
         return f'Nombre total de livres: {cls.nombre_total_livres}'
 
+    @staticmethod
+    def verifier_livre_par_isbn(isbn: str):
+        for livre in Livre.tous_les_livres:
+            if livre.isbn == isbn:  # ✅ Comparer l'ISBN
+                return livre
+        return None
+
+    @staticmethod
+    def afficher_livre_par_isbn(isbn: str):
+        livre = Livre.verifier_livre_par_isbn(isbn)
+        if livre:
+                return f"{livre.titre} de {livre.auteur}"
+        return f"Livre introuvable (ISBN: {isbn})"
+
 
 # Usage :
-livre_1 = Livre('Harry Potter', 'J.K. Rowling', '1234567891')
+""" livre_1 = Livre('Harry Potter', 'J.K. Rowling', '1234567891')
 print(livre_1)  # Appelle automatiquement __str__
 livre_2 = Livre('Harry Potter vol 2', 'J.K. Rowling', '1234567890')
 print(livre_2)  # Appelle automatiquement __str__
 
-print(Livre.obtenir_nombre_total())
+print(Livre.obtenir_nombre_total()) """
